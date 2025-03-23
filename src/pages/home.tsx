@@ -15,7 +15,7 @@ export default function HomePage() {
   return (
     <div className="container py-5 mx-auto min-h-screen flex flex-col gap-5">
       <div className="flex items-center justify-between">
-        <h1>Vocabulary</h1>
+        <h1 className="text-2xl font-bold">Vocabulary</h1>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline">Add new Word</Button>
