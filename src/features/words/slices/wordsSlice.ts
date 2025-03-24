@@ -83,6 +83,25 @@ const wordsSlice = createSlice({
 
       state.vocabulary[wordIndex] = action.payload;
     },
+    editSentence: (
+      state,
+      action: PayloadAction<{ wordId: string | undefined; sentence: Sentence }>
+    ) => {
+      if (!action.payload.wordId) return;
+
+      const wordIdx = state.vocabulary.findIndex(
+        (word) => word.id === action.payload.wordId
+      );
+
+      const sentenceIdx = state.vocabulary[wordIdx].sentences.findIndex(
+        (sentence) => sentence.id === action.payload.sentence.id
+      );
+
+      if (wordIdx !== -1 && sentenceIdx !== -1) {
+        state.vocabulary[wordIdx].sentences[sentenceIdx] =
+          action.payload.sentence;
+      }
+    },
     deleteWord: (state, action: PayloadAction<string>) => {
       state.vocabulary = state.vocabulary.filter(
         (word) => word.id !== action.payload
@@ -109,6 +128,12 @@ const wordsSlice = createSlice({
 
 export const { getVocabulary, getWordById, getWordBySlug, getSentencesBySlug } =
   wordsSlice.selectors;
-export const { addWord, addSentence, editWord, deleteWord, deleteSentence } =
-  wordsSlice.actions;
+export const {
+  addWord,
+  addSentence,
+  editWord,
+  editSentence,
+  deleteWord,
+  deleteSentence,
+} = wordsSlice.actions;
 export default wordsSlice.reducer;
