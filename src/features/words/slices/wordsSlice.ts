@@ -15,6 +15,8 @@ export interface Word {
   slug: string;
   description: string;
   createdAt: string;
+  lastRecalledAt?: string;
+  nextRecallAt?: string;
   sentences: Sentence[];
 }
 
@@ -56,6 +58,8 @@ const wordsSlice = createSlice({
         slug: action.payload.word.toLowerCase().replace(/\s/g, "-"),
         description: action.payload.description,
         createdAt: new Date().toISOString(),
+        lastRecalledAt: undefined,
+        nextRecallAt: undefined,
         sentences: [],
       };
 
@@ -128,6 +132,7 @@ const wordsSlice = createSlice({
 
 export const { getVocabulary, getWordById, getWordBySlug, getSentencesBySlug } =
   wordsSlice.selectors;
+
 export const {
   addWord,
   addSentence,
@@ -136,4 +141,5 @@ export const {
   deleteWord,
   deleteSentence,
 } = wordsSlice.actions;
+
 export default wordsSlice.reducer;

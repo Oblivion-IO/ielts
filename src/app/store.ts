@@ -12,7 +12,8 @@ import {
   REGISTER,
 } from "redux-persist";
 
-import wordsReducer from "../features/words/slices/wordsSlice";
+import wordsReducer from "@/features/words/slices/wordsSlice";
+import recallReducer from "@/features/recall/slices/recallSlice";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   words: wordsReducer,
+  recall: recallReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

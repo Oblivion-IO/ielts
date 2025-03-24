@@ -55,6 +55,8 @@ export default function WordsList() {
             <TableHead>Word</TableHead>
             <TableHead>Description</TableHead>
             <TableHead>Created At</TableHead>
+            <TableHead>Last Recalled At</TableHead>
+            <TableHead>Next Recall At</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -64,6 +66,16 @@ export default function WordsList() {
               <TableCell>{word.word}</TableCell>
               <TableCell>{word.description}</TableCell>
               <TableCell>{formatDate(word.createdAt)}</TableCell>
+              <TableCell>
+                {word.lastRecalledAt
+                  ? formatDate(word.lastRecalledAt)
+                  : "Never"}
+              </TableCell>
+              <TableCell>
+                {word.nextRecallAt
+                  ? formatDate(word.nextRecallAt)
+                  : "Not scheduled"}
+              </TableCell>
               <TableCell>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
