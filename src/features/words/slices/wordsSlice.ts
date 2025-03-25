@@ -9,9 +9,20 @@ export interface Sentence {
   createdAt: string;
 }
 
+export type WordType = "Noun" | "Verb" | "Adjective" | "Phrase" | "Adverb";
+
+export const wordTypes: WordType[] = [
+  "Noun",
+  "Verb",
+  "Adjective",
+  "Phrase",
+  "Adverb",
+];
+
 export interface Word {
   id: string;
   word: string;
+  type: WordType;
   slug: string;
   description: string;
   createdAt: string;
@@ -55,6 +66,7 @@ const wordsSlice = createSlice({
       const newWord: Word = {
         id: uuidv4(),
         word: action.payload.word,
+        type: action.payload.type,
         slug: action.payload.word.toLowerCase().replace(/\s/g, "-"),
         description: action.payload.description,
         createdAt: new Date().toISOString(),

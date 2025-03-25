@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/common/components/ui/card";
 import {
   useRecallWords,
   RecallDifficulty,
-} from "@/features/recall/hooks/useRecallWords";
+} from "../hooks/useRecallWords";
 import "./recall.css";
 
 export default function Recall() {
@@ -84,8 +84,8 @@ export default function Recall() {
         </p>
       </div>
 
-      <div className="embla" ref={emblaRef}>
-        <div className="embla__container">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex">
           {recallWords.map((word) => (
             <div key={word.id} className="embla__slide w-full">
               <Card className="w-full p-6">

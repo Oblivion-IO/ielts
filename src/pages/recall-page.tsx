@@ -1,5 +1,5 @@
 import GoBack from "@/common/components/core/goback";
-import Recall from "@/features/words/components/recall";
+import Recall from "@/features/recall/components/recall";
 
 export default function RecallPage() {
   return (

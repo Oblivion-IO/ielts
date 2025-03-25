@@ -2,13 +2,24 @@ import { Button } from "@/common/components/ui/button";
 import { Input } from "@/common/components/ui/input";
 import { Label } from "@/common/components/ui/label";
 import { Textarea } from "@/common/components/ui/textarea";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { addWord } from "../slices/wordsSlice";
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { addWord, WordType, wordTypes } from "../slices/wordsSlice";
 import { useAppDispatch } from "@/app/store";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/common/components/ui/select";
+import { DialogClose } from "@/common/components/ui/dialog";
 
 export interface ICreateWordForm {
   word: string;
   description: string;
+  type: WordType;
 }
 
 export default function CreateWordForm() {
@@ -16,8 +27,10 @@ export default function CreateWordForm() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<ICreateWordForm>();
+
   const onSubmit: SubmitHandler<ICreateWordForm> = (data) => {
     dispatch(addWord(data));
   };
@@ -38,6 +51,32 @@ export default function CreateWordForm() {
         {errors.word && <span>{errors.word.message}</span>}
       </div>
       <div className="flex flex-col items-start gap-2">
+        <Label htmlFor="type">Type</Label>
+        <Controller
+          name="type"
+          control={control}
+          rules={{ required: "Type is required" }}
+          render={({ field }) => (
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Word Types</SelectLabel>
+                  {wordTypes.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          )}
+        />
+        {errors.type && <span>{errors.type.message}</span>}
+      </div>
+      <div className="flex flex-col items-start gap-2">
         <Label htmlFor="description">Description</Label>
         <Textarea
           id="description"
@@ -46,8 +85,9 @@ export default function CreateWordForm() {
         />
         {errors.description && <span>{errors.description.message}</span>}
       </div>
-
-      <Button type="submit">Add New Word</Button>
+      <DialogClose asChild>
+        <Button type="submit">Add New Word</Button>
+      </DialogClose>
     </form>
   );
 }

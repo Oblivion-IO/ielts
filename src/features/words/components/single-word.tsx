@@ -16,7 +16,9 @@ export default function SingleWord() {
       <h2 className="text-xl font-bold border-b pb-1">{word.word}</h2>
       <div className="flex flex-col gap-1">
         <small className="text-xs">Description</small>
-        <p>{word.description}</p>
+        <p>
+          ({word.type}) {word.description}
+        </p>
       </div>
     </div>
   );

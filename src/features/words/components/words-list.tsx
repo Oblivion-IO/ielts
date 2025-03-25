@@ -53,6 +53,7 @@ export default function WordsList() {
         <TableHeader>
           <TableRow>
             <TableHead>Word</TableHead>
+            <TableHead>Type</TableHead>
             <TableHead>Description</TableHead>
             <TableHead>Created At</TableHead>
             <TableHead>Last Recalled At</TableHead>
@@ -64,6 +65,7 @@ export default function WordsList() {
           {vocabulary.map((word) => (
             <TableRow key={word.id}>
               <TableCell>{word.word}</TableCell>
+              <TableCell>{word.type}</TableCell>
               <TableCell>{word.description}</TableCell>
               <TableCell>{formatDate(word.createdAt)}</TableCell>
               <TableCell>
